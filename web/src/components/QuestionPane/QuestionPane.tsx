@@ -5,7 +5,7 @@ import Constraints from './Constraints'
 
 const QuestionPane = () => {
   return (
-    <div className="p-2">
+    <div className="p-4 dark:bg-dark3">
       <Question />
       <Example number={1} />
       <Example number={2} />
