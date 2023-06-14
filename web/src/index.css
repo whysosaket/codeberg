@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (prefers-color-scheme: light) {
+    :root {
+      --color-bg: #ffffff;
+      --color-fg: #000000;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #000000;
+      --color-fg: #ffffff;
+    }
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}

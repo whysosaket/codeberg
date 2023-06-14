@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import {motion } from "framer-motion";
 
 const TestCase = () => {
+
+  const inputRef = useRef(null);
+
+  useEffect(()=>{
+    inputRef.current.value = '[1,2,3,4,5]'
+  },[])
+
+
   return (
-    <div className="px-1">
+    <motion.div
+    initial={{x:200}}
+    animate={{x:0}}
+    transition={{ duration: 0.5 }}
+    className="px-1">
       <>
         {/*Tabs navigation*/}
         <ul
@@ -48,11 +61,15 @@ const TestCase = () => {
             data-te-tab-active=""
           >
             <h1 className="dark:text-white m-1 text-sm font-semibold">Example Testcase</h1>
-            <input className='w-full h-28 my-1 p-3 bg-black font-bold dark:bg-dark5 bg-opacity-10 text-gray-600 dark:text-gray-200 rounded-lg text-sm' value={'[12,1,2,9,7]'} />
+            <input placeholder="Enter Testcase" className='border-none w-full h-12 my-1 p-3 bg-black font-bold dark:bg-dark5 bg-opacity-10 text-gray-600 dark:text-gray-200 rounded-lg text-sm' ref={inputRef} />
+            <div className="flex justify-end p-2">
+              <button className="bg-dark5 hover:bg-dark4 rounded-md px-4 py-2 font-semibold mx-2">Run</button>
+              <button className="bg-dark5 hover:bg-dark4 rounded-md px-4 py-2 font-semibold">Submit</button>
+            </div>
           </div>
         </div>
       </>
-    </div>
+    </motion.div>
   );
 };
 

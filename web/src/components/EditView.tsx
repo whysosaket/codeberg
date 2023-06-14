@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
+import {motion} from "framer-motion";
 
 const defaultValue = `
 // some comment
@@ -31,14 +32,18 @@ const EditView = () => {
   }, []);
 
   return (
-    <div className="bg-dark3 overflow-hidden z-0">
+    <motion.div
+    initial={{y:-200}}
+    animate={{y:0}}
+    transition={{ duration: 0.5 }}
+    className="bg-dark3 overflow-hidden z-0">
       <Editor
-        height="60vh"
+        height="55vh"
         defaultLanguage="java"
         theme={`${isDarkMode ? "vs-dark" : "light"}`}
         defaultValue={defaultValue}
       />
-    </div>
+    </motion.div>
   );
 };
 
