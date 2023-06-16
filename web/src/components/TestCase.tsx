@@ -62,9 +62,9 @@ const TestCase = () => {
           >
             <h1 className="dark:text-white m-1 text-sm font-semibold">Example Testcase</h1>
             <input placeholder="Enter Testcase" className='border-none w-full h-12 my-1 p-3 bg-black font-bold dark:bg-dark5 bg-opacity-10 text-gray-600 dark:text-gray-200 rounded-lg text-sm' ref={inputRef} />
-            <div className="flex justify-end p-2">
-              <button className="bg-dark5 hover:bg-dark4 rounded-md px-4 py-2 font-semibold mx-2">Run</button>
-              <button className="bg-dark5 hover:bg-dark4 rounded-md px-4 py-2 font-semibold">Submit</button>
+            <div className="flex justify-end p-2 text-black dark:text-gray-300">
+              <button className="bg-dark5 bg-opacity-30  dark:bg-opacity-100 dark:hover:bg-dark4 hover:bg-slate-400 rounded-md px-4 py-2 font-semibold mx-2">Run</button>
+              <button className="bg-dark5 bg-opacity-30 dark:bg-opacity-100 dark:hover:bg-dark4 hover:bg-slate-400 rounded-md px-4 py-2 font-semibold">Submit</button>
             </div>
           </div>
         </div>

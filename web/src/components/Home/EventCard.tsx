@@ -8,7 +8,7 @@ const EventCard = () => {
       initial={{ rotateY: 180, scale: 1.3 }}
       animate={{ rotateY: 0, scale: 1 }}
       transition={{ duration: 0.6 }}
-      className="md:w-1/4 w-1/2 my-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      className="md:w-1/4 md:mx-2 mx-8 my-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
           <img
             className="rounded-t-lg w-full opacity-90 max-w-md p-2"
@@ -27,7 +27,7 @@ const EventCard = () => {
           </p>
           <a
             href="#"
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+            className="transition transform hover:-translate-y-0.5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-400 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
           >
             Register
             <svg

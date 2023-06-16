@@ -5,7 +5,7 @@ import UpcomingEvents from "../components/Home/UpcomingEvents";
 const Home = () => {
   return (
     <>
-      <div className="p-2 bg-no-repeat bg-fixed dark:bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
+      <div className="p-2 bg-no-repeat bg-fixed min-h-screen dark:bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
         <motion.h1
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}

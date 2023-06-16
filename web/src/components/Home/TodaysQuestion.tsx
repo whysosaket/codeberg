@@ -19,7 +19,7 @@ const TodaysQuestion = () => {
         </div>
         <Link
           to="/solve"
-          className="bg-blue-900 hidden md:block text-white hover:bg-blue-900 hover:bg-opacity-10 bg-opacity-25 py-2 px-3 rounded-lg mx-2"
+          className="bg-blue-900 hidden md:block text-white hover:bg-blue-900 hover:bg-opacity-10 dark:bg-opacity-25 bg-opacity-60 py-2 px-3 rounded-lg mx-2"
         >
           Solve
         </Link>
@@ -28,7 +28,7 @@ const TodaysQuestion = () => {
         <p className="my-auto">Solved Today: <span className="text-xs">69 </span></p>
         <Link
           to="/solve"
-          className="bg-blue-900 md:hidden text-white hover:bg-blue-900 hover:bg-opacity-10 bg-opacity-25 py-2 px-3 rounded-lg mx-2"
+          className="bg-blue-900 md:hidden text-white hover:bg-blue-900 hover:bg-opacity-10 dark:bg-opacity-25 bg-opacity-60 py-2 px-3 rounded-lg mx-2"
         >
           Solve
         </Link>
