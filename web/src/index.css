@@ -11,7 +11,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-      --color-bg: #000000;
+      --color-bg: #181818;
       --color-fg: #ffffff;
     }
 }
@@ -23,4 +23,8 @@ textarea:focus, input:focus{
 body {
     background-color: var(--color-bg);
     color: var(--color-fg);
+}
+
+.markdown > * {
+  all: revert;
 }

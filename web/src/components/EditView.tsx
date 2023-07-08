@@ -38,7 +38,7 @@ const EditView = () => {
     transition={{ duration: 0.5 }}
     className="bg-dark3 overflow-hidden z-0">
       <Editor
-        height="55vh"
+        height="65vh"
         defaultLanguage="java"
         theme={`${isDarkMode ? "vs-dark" : "light"}`}
         defaultValue={defaultValue}
