@@ -28,8 +28,8 @@ const sendOTP = async (req: CustomRequest, res: Response) => {
     
           // check if email is already registered
           const user = await findUserByEmail(email1);
-          if(user){
-            return res.json({error: "Email already registered"});
+          if(!user){
+            return res.json({error: "Email not registered"});
           }
     
           // check if otp is already sent
