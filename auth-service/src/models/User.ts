@@ -88,3 +88,4 @@ const UserModel = model("User", userSchema);
 export default UserModel;
 
 export const findUserByEmail = (email: string) => UserModel.findOne({ email });
+export const findUserByReg = (registrationNumber: string) => UserModel.findOne({ registrationNumber });

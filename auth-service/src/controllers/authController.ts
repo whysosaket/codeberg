@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import User, { findUserByEmail } from "../models/User";
+import User, { findUserByEmail, findUserByReg } from "../models/User";
 import getLoginInfo from "../utils/soaLogin";
 import { verifyOtp } from '../models/Otp';
 import { UEModel, didChange } from '../models/UpdatedEmail';
@@ -17,6 +17,11 @@ const register = async (req: Request, res: Response) => {
         let user = await findUserByEmail(email.toLowerCase());
         if(user){
             return res.status(400).json({error: "Email already in use!"});
+        }
+
+        user = await findUserByReg(registrationNumber.toLowerCase());
+        if(user){
+            return res.status(400).json({error: "Registration Number already in use!"});
         }
 
         const userInfo = await getLoginInfo(registrationNumber, password);
@@ -50,12 +55,25 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
     let success = false;
-    let { email, password } = req.body;
+    let { email, password, registrationNumber } = req.body;
+    if(!email && !registrationNumber || !password){
+        return res.status(400).json({error: "Please enter all the fields!"});
+    }
     try{
 
-        let user = await findUserByEmail(email.toLowerCase());
+        let user;
+        if(email){
+        user = await findUserByEmail(email.toLowerCase());
         if(!user){
             return res.status(400).json({error: "Invalid Credentials!"});
+        }
+        }else if(registrationNumber){
+        user = await findUserByReg(registrationNumber.toLowerCase());
+        if(!user){
+            return res.status(400).json({error: "Invalid Credentials!"});
+        }
+        }else{
+        return res.status(400).json({error: "Please enter all the fields!"});
         }
 
         const passwordCompare = await bcrypt.compare(password.toString(), user.password);
@@ -81,13 +99,17 @@ const login = async (req: Request, res: Response) => {
 
 const changePassword = async (req: Request, res: Response) => {
     let success = false;
-    let { email, newPassword, otp} = req.body;
-    if(!email || !newPassword || !otp){
+    let { email, registrationNumber, newPassword, otp} = req.body;
+    if(!email || !newPassword || !otp || !registrationNumber){
         return res.status(400).json({error: "Please enter all the fields!"});
     }
     try{
             let user = await findUserByEmail(email.toLowerCase());
             if(!user){
+                return res.status(400).json({error: "Invalid Credentials!"});
+            }
+
+            if(user.registrationNumber !== registrationNumber){
                 return res.status(400).json({error: "Invalid Credentials!"});
             }
 
@@ -110,8 +132,9 @@ const changePassword = async (req: Request, res: Response) => {
 
 const changeEmail = async (req: Request, res: Response) => {
     let success = false;
-    let { email, newEmail, password} = req.body;
-    if(!email || !newEmail || !password){
+    let { email, newEmail,registrationNumber, password} = req.body;
+
+    if(!email || !newEmail || !password || !registrationNumber){
         return res.status(400).json({error: "Please enter all the fields!"});
     }
 
@@ -124,8 +147,11 @@ const changeEmail = async (req: Request, res: Response) => {
             if(!user){
                 return res.status(400).json({error: "Invalid Credentials!"});
             }
+            if(user.registrationNumber !== registrationNumber){
+                return res.status(400).json({error: "Invalid Credentials!"});
+            }
 
-            const updatedEmail = await didChange(newEmail.toLowerCase());
+            const updatedEmail = await didChange(registrationNumber);
             if(updatedEmail){
                 return res.status(400).json({error: "Email updated recently! This feature will be available after 7 days from last updation."});
             }
@@ -138,6 +164,7 @@ const changeEmail = async (req: Request, res: Response) => {
             const updatedEmailEntry = await UEModel.create({
                 newEmail: newEmail.toLowerCase(),
                 oldEmail: email.toLowerCase(),
+                registrationNumber,
             });
 
             user.email = newEmail.toLowerCase();
