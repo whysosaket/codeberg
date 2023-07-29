@@ -13,8 +13,8 @@ const getLoginInfo = async (registrationNumber:string, password: string) => {
         "MemberType": "S",
     }
 
+    try{
     // send a post req and save the cookies
-
     const response = await fetch(loginURL, {
         method: 'POST',
         headers: {
@@ -23,9 +23,14 @@ const getLoginInfo = async (registrationNumber:string, password: string) => {
         body: JSON.stringify(payload),
     });
 
+    if (!response.ok) {
+        throw new Error('Login failed'); // You can throw custom errors for specific cases
+    }
+
     const cookies = response.headers.get('set-cookie');
     console.log('Cookies:', cookies);
 
+    
     const getStudentInfo = await fetch(studentInfoURL, {
         method: 'POST',
         headers: {
@@ -49,6 +54,11 @@ const getLoginInfo = async (registrationNumber:string, password: string) => {
         sectionCode: studentInfo.detail[0].sectioncode,
     }
     console.log('Required Info:', requiredInfo);
+    return requiredInfo;
+    }catch(err){
+        console.log(err);
+        return false;
+    }
 }
 
 export default getLoginInfo;

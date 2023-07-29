@@ -1,23 +1,24 @@
-import express, {Express, json} from 'express';
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express, {Express} from 'express';
+import cors from 'cors';
+
+import router from './routes';
 import connectDB from './db';
 import getLoginInfo from './utils/soaLogin';
 
-
-config();
-const PORT = process.env.PORT || 80;
-const app:Express = express();
-
 connectDB();
-getLoginInfo(process.env.REG||"", process.env.PASS||"");
 
-app.use(json());
+const app: Express = express();
+const PORT = process.env.PORT || 9000;
 
-app.use('/auth', require('./routes/auth'));
+// getLoginInfo(process.env.REG||"", process.env.PASS||"");
 
-app.get('/', (req, res) => {
-    res.send('Hi from Auth Service')
-})
+app.use(cors());
+app.use(express.json());
+
+app.use("/", router());
 
 app.listen(PORT, () => {
     console.log(`auth-service listening on port ${PORT}`);

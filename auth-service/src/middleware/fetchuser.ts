@@ -9,7 +9,7 @@ interface UserPayload {
     user: any;
 }
 
-const fetchuser = (req: Request, res: Response, next: NextFunction)=>{
+const fetchUser = (req: Request, res: Response, next: NextFunction)=>{
     
     // Get the user from auth tokein and extract id and then add it to the req object
     const token = req.header('auth-token');
@@ -27,4 +27,4 @@ const fetchuser = (req: Request, res: Response, next: NextFunction)=>{
     }
 }
 
-module.exports = fetchuser;
+export default fetchUser;
