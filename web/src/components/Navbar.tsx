@@ -1,40 +1,19 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo";
 
 const Navbar = () => {
-  const [isDarkMode, setDarkMode] = useState(
-    window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleChange = (event) => {
-      setDarkMode(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
   return (
     <>
       <header className="header z-10 sticky top-0 bg-slate-100 dark:bg-dark1 dark:text-white shadow-md flex items-center justify-between px-8 py-02">
         {/* logo */}
         <Link to="/" className="md:w-3/12 w-4/12 p-2 flex justify-start my-auto">
           {/* <img className="fill-blue-400" height={50} width={30} src="/logo.svg" /> */}
-          <Logo className={`${isDarkMode ? "fill-white" : "fill-blue-500"}`} />
+          <Logo />
           <span
-            className={`${
-              isDarkMode ? "text-white" : "text-blue-400"
-            } my-auto font-bold`}
+            className={`my-auto font-bold`}
           >
-            <span className="dark:text-blue-500">CODE</span>
-            <span className="dark:text-white">berg</span>
+            <span className="text-blue-500">CODE</span>
+            <span className="text-white bg-blue-500 dark:bg-transparent dark:text-white">berg</span>
           </span>
         </Link>
         {/* navigation */}

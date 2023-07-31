@@ -1,4 +1,3 @@
-import React from "react";
 import Entry from "./Entry";
 
 const LeaderboardPane = () => {

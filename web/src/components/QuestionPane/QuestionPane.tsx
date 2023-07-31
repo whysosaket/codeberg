@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import Question from './Question'
 import Example from './Example'
 import Constraints from './Constraints'
@@ -13,7 +13,7 @@ import rehypeRaw from "rehype-raw";
 // testing md files
 import Test from '../../assets/test.md';
 
-const QuestionPane = (props) => {
+const QuestionPane = (props: {isMarkdown: boolean}) => {
 
   const [questionText, setQuestionText] = useState('');
 
