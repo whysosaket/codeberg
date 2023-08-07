@@ -1,16 +1,39 @@
-import {MouseEvent, useRef} from "react";
+import { MouseEvent, useRef } from "react";
 import Logo from "../../assets/logo";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { login } from "@/features/user/UserSlice";
+import { useAppDispatch } from "@/app/hooks";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const emailRef:any = useRef();
-  const passwordRef:any = useRef();
+  const emailRef: any = useRef();
+  const passwordRef: any = useRef();
   const handleSubmit = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    handleLogin(email, password);
+  };
+
+  const handleLogin = async (email: string, password: string) => {
+    const response = await fetch("http://localhost:9000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+    if (data.success) {
+      localStorage.setItem("auth-token", data.authtoken);
+      dispatch(login());
+      navigate("/profile");
+    } else {
+      alert(data.error);
+    }
   };
 
   return (
@@ -22,9 +45,7 @@ const LoginForm = () => {
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
           >
             <Logo />
-            <span className="text-2xl font-semibold text-blue-500">
-              Log
-            </span>
+            <span className="text-2xl font-semibold text-blue-500">Log</span>
             in
           </a>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

@@ -1,4 +1,3 @@
-import React from 'react'
 import ProfileCard from '../components/Profile/ProfileCard';
 import {motion} from "framer-motion"
 
