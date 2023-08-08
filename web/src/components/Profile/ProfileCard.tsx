@@ -1,6 +1,30 @@
-import React from "react";
+import {useEffect} from "react";
+import { setUser } from "@/features/user/UserSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { fetchUser } from "@/features/user/UserAPI";
+import { selectUser } from "@/features/user/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCard = () => {
+
+  const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
+
+  const dispatch = useAppDispatch();
+  const handleFetchUser = async () => {
+    const user = await fetchUser();
+    dispatch(setUser(user));
+  };
+
+  useEffect(() => {
+    if(!user.isLogged) {
+      navigate("/login");
+      return;
+    }
+    handleFetchUser();
+  }, []);
+
+
   return (
     <div>
       <div className="md:px-16">
@@ -58,13 +82,13 @@ const ProfileCard = () => {
           <div className="md:mt-20 mt-5 text-center border-b pb-12">
             {" "}
             <h1 className="text-4xl font-medium text-gray-700 dark:text-white">
-              Saket Aryan{" "}
+              {user.name}{" "}
             </h1>{" "}
-            <p className="font-light text-gray-600 mt-3 dark:text-white">CSE - Z, 2025</p>{" "}
+            <p className="font-light text-gray-600 mt-3 dark:text-white">{user.registrationNumber}</p>{" "}
             <p className="mt-8 text-gray-500">
-              Solution Manager - Creative Tim Officer
+              {user.sectionCode}, {user.batch}
             </p>{" "}
-            <p className="mt-2 text-gray-500">University of Computer Science</p>
+            <p className="mt-2 text-gray-500">{user.program}</p>
           </div>{" "}
           <div className="mt-12 flex flex-col justify-center">
             {" "}

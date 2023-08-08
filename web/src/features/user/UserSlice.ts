@@ -7,8 +7,9 @@ const initialState: User = {
     _id: "",
     name: "",
     email: "",
-    branch: "",
     avatar: "",
+    batch: "",
+    program: "",
     registrationNumber: "",
     sectionCode: "",
     isLogged: isLoggedin(),
@@ -19,10 +20,22 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<User>) => {
-            state = action.payload;
+            state.name = action.payload.name;
+            state.email = action.payload.email;
+            state.batch = action.payload.batch;
+            state.program = action.payload.program;
+            state.registrationNumber = action.payload.registrationNumber;
+            state.sectionCode = action.payload.sectionCode;
+            state.isLogged = true;
         },
         logout: (state) => {
             localStorage.removeItem("auth-token");
+            state.name = "";
+            state.email = "";
+            state.batch = "";
+            state.program = "";
+            state.registrationNumber = "";
+            state.sectionCode = "";
             state.isLogged = false;
         },
         login: (state) => {

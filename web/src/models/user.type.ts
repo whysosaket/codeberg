@@ -2,7 +2,8 @@ interface User {
     _id: string;
     name: string;
     email: string;
-    branch: string;
+    batch: string;
+    program: string;
     avatar: string;
     registrationNumber: string;
     sectionCode: string;
