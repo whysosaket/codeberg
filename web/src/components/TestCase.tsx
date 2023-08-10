@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import {motion } from "framer-motion";
 
 const TestCase = () => {
 
-  const inputRef = useRef(null);
+  const inputRef:any = useRef(null);
 
   useEffect(()=>{
     inputRef.current.value = '[1,2,3,4,5]'

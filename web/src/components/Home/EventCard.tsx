@@ -1,7 +1,7 @@
-import React from "react";
 import {motion} from "framer-motion";
+import {EventI, Status} from "@/models";
 
-const EventCard = () => {
+const EventCard = (props: {  event: EventI }) => {
   return (
     <>
       <motion.div
@@ -9,27 +9,34 @@ const EventCard = () => {
       animate={{ rotateY: 0, scale: 1 }}
       transition={{ duration: 0.6 }}
       className="md:w-1/4 md:mx-2 mx-8 my-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+        <div className="flex justify-center max-h-[150px] min-h-[150px] overflow-hidden">
+        <a href={props.event.link}>
           <img
-            className="rounded-t-lg w-full opacity-90 max-w-md p-2"
-            src="https://cdn.pixabay.com/photo/2021/11/01/15/20/meta-logo-6760788_1280.png"
+            className="rounded-t-lg opacity-90 m-auto h-[150px] p-2"
+            src={props.event.images[0]}
             alt=""
           />
         </a>
-        <div className="p-5">
+        </div>
+        <div className="p-5 flex flex-col justify-between">
+          <div className="">
           <a href="#">
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Code For X
+              {props.event.name}
             </h5>
           </a>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Get a chance to join codex
+            {props.event.description.slice(0, 70)}...
           </p>
+          </div>
+          <div className="">
+          <div className="flex justify-between">
           <a
-            href="#"
-            className="transition transform hover:-translate-y-0.5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-400 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+            href={props.event.link}
+            target="_blank"
+            className="transition transform hover:-translate-y-0.5 inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-gray-400 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
           >
-            Register
+            Learn More
             <svg
               aria-hidden="true"
               className="w-4 h-4 ml-2 -mr-1"
@@ -44,10 +51,35 @@ const EventCard = () => {
               />
             </svg>
           </a>
+          <StatusIndicator status={ props.event.status} />
+          </div>
+          </div>
         </div>
       </motion.div>
     </>
   );
 };
+
+const StatusIndicator = (props: {status: string})=>{
+  return (
+    <>
+      {props.status === 'live' && (
+        <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+          Live
+        </span>
+      )}
+      {props.status === 'past' && (
+        <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
+          Past
+        </span>
+      )}
+      {props.status === 'upcoming' && (
+        <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+          Upcoming
+        </span>
+      )}
+    </>
+  )
+}
 
 export default EventCard;

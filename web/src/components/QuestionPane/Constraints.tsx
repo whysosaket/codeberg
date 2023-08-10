@@ -1,5 +1,3 @@
-import React from 'react'
-
 const listStyle = 'text-sm text-center w-1/4 md:w-2/5 bg-black dark:bg-dark5 dark:text-gray-200 bg-opacity-10 p-1 rounded-md my-2';
 
 const Constraints = () => {

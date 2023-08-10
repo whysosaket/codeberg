@@ -1,8 +1,6 @@
-import React from 'react'
-
 const inoutStyle = "font-semibold dark:text-white text-gray-900 text-base"
 
-const Example = (props) => {
+const Example = (props: {number: number}) => {
   return (
     <>
         <div className='my-5'>

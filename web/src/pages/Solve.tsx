@@ -6,7 +6,7 @@ const Solve = () => {
   return (
    <>
    <div className='md:flex'>
-    <div className='md:w-1/2 border dark:border-none'><QuestionPane isMarkdown={true} /></div>
+    <div className='md:w-1/2 border dark:border-none'><QuestionPane isMarkdown={false} /></div>
     <div className='md:w-1/2 border dark:border-none dark:bg-dark3'>
       <EditView />
       <TestCase />  

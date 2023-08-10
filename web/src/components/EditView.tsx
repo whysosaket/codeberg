@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import {motion} from "framer-motion";
 
@@ -20,7 +20,7 @@ const EditView = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const handleChange = (event) => {
+    const handleChange = (event: any) => {
       setDarkMode(event.matches);
     };
 

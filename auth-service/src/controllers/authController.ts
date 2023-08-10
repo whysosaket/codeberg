@@ -82,7 +82,7 @@ const login = async (req: Request, res: Response) => {
         }
 
         const payload = {
-            donor: {
+            user: {
               id: user.id,
             },
         };

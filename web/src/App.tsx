@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import Solve from "./pages/Solve";
 import Profile from "./pages/Profile";
 import Leaderboard from "./pages/Leaderboard";
-import { Loader } from "./components/Loader";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 
 
@@ -23,6 +23,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       </Router>
     </>
